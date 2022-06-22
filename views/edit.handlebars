@@ -1,0 +1,53 @@
+<form action="" method="post">
+  <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-10 mx-auto">
+
+        <span>餐廳名稱</span>
+        <input class="form-control" type="text" name="name" placeholder="若要編輯餐廳名稱，請在此輸入新的餐廳名稱"
+          value="{{restaurant.name}}">
+
+        <span>英文名稱</span>
+        <input class="form-control" type="text" name="name_en" placeholder="若要編輯餐廳名稱，請在此輸入新的餐廳名稱"
+          value="{{restaurant.name_en}}">
+
+        <span>餐廳類型</span>
+        <input class="form-control" type="text" name="category" placeholder="若要編輯餐廳類別，請在此輸入新的類別名稱"
+          value="{{restaurant.category}}">
+
+        <span>餐廳評分</span>
+        <input class="form-control" type="text" name="rating" placeholder="若要編輯餐廳名稱，請在此輸入新的餐廳名稱"
+          value="{{restaurant.rating}}">
+
+        <span>地址</span>
+        <input class="form-control" type="text" name="location" placeholder="若要編輯餐廳地址，請在此輸入新的地址"
+          value="{{restaurant.location}}">
+
+        <span>餐廳地圖</span>
+        <input class="form-control" type="text" name="google_map" placeholder="若要編輯餐廳地圖，請在此輸入新的網址"
+          value="{{restaurant.google_map}}">
+
+
+        <span>餐廳電話</span>
+        <input class="form-control" type="text" name="phone" placeholder="若要編輯餐廳電話，請在此輸入新的電話"
+          value="{{restaurant.phone}}">
+
+        <span>餐廳描述</span>
+        <input class="form-control" type="text" name="description" placeholder="若要編輯餐廳敘述，請在此輸入新的敘述"
+          value="{{restaurant.description}}">
+
+        <span>餐廳圖片</span>
+        <input class="form-control" type="text" name="image" placeholder="若要編輯餐廳照片，請在此輸入新的照片網址"
+          value="{{restaurant.image}}">
+
+        <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
+          style="max-width: 600px;">
+
+
+      </div>
+    </div>
+  </div>
+  <button type="submit">儲存變更</button>
+</form>

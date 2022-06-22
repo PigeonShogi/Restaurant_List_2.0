@@ -33,14 +33,14 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.get('/restaurants/:id', (req, res) => {
-  const restaurantId = req.params.id
+app.get('/restaurants/:_id', (req, res) => {
+  const restaurantId = req.params._id
   RestaurantLean
     .then(restaurants => {
       const restaurant = restaurants.find(element => {
-        return element.id.toString() === restaurantId
+        return element._id.toString() === restaurantId
       })
-      res.render('show', { restaurant })
+      res.render('show', { restaurant, restaurantId })
     })
 })
 
@@ -82,6 +82,45 @@ app.post('/new_restaurant_form', (req, res) => {
     .catch(error => console.error(error))
 })
 
+app.get('/restaurants/:_id/edit', (req, res) => {
+  const id = req.params._id
+  RestaurantLean.then(restaurants => {
+    const restaurant = restaurants.find(element => {
+      return element._id.toString() === id
+    })
+    res.render('edit', ({ restaurant }))
+  })
+})
+
+app.post('/restaurants/:_id/edit', (req, res) => {
+  const id = req.params._id
+  const name = req.body.name
+  const nameEn = req.body.name_en
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const googleMap = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = name
+      restaurant.name_en = nameEn
+      restaurant.category = category
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = googleMap
+      restaurant.rating = rating
+      restaurant.description = description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
 app.listen(port, () => {
-  console.log('伺服器監聽中')
+  console.log('餐廳清單伺服器監聽中')
 })
