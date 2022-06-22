@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -24,6 +25,7 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
   RestaurantLean
@@ -58,6 +60,26 @@ app.get('/search', (req, res) => {
       }
     }
     )
+})
+
+app.get('/new_restaurant', (req, res) => {
+  res.render('add')
+})
+
+app.post('/new_restaurant_form', (req, res) => {
+  const name = req.body.name
+  const nameEn = req.body.name_en
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const googleMap = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+
+  return Restaurant.create({ name, nameEn, category, image, location, phone, googleMap, rating, description })
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
 })
 
 app.listen(port, () => {
