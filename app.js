@@ -9,8 +9,6 @@ const db = mongoose.connection
 const Restaurant = require('./models/restaurant')
 const RestaurantLean = Restaurant.find().lean()
 
-// const restaurantList = require('./restaurant.json') // 引進資料庫後就不需仰賴 JSON 檔，完工後可刪除此行。
-
 const app = express()
 const port = 3000
 
