@@ -41,7 +41,10 @@
             <footer class="mx-3 text-end">
               <a class="m-1" href="/restaurants/{{this._id}}/edit">編輯</a>
               <a class="m-1" href="/restaurants/{{this._id}}">詳情</a>
-              <button class="btn btn-warning">刪除</button>
+              <form action="/restaurant/{{this._id}}/delete" method="post" style="display: inline;">
+                <button class="btn btn-warning" type="submit">刪除</button>
+              </form>
+
             </footer>
           </div>
         </a>
