@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -23,6 +24,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   Restaurant.find().lean()
@@ -87,7 +89,7 @@ app.get('/restaurants/:_id/edit', (req, res) => {
     })
 })
 
-app.post('/restaurants/:_id/edit', (req, res) => {
+app.put('/restaurants/:_id', (req, res) => {
   const _id = req.params._id
   const name = req.body.name
   const nameEn = req.body.name_en
@@ -120,7 +122,7 @@ app.post('/restaurants/:_id/edit', (req, res) => {
     )
 })
 
-app.post('/restaurant/:_id/delete', (req, res) => {
+app.delete('/restaurant/:_id', (req, res) => {
   const id = req.params._id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
