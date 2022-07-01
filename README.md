@@ -15,6 +15,8 @@
 
 ・使用者可刪除餐廳資料
 
+・使用者可選擇資料排序規則
+
 ## 安裝 
 1. 使用終端機 Clone 此專案至本機電腦
 ```
@@ -56,3 +58,4 @@ nodemon app.js
 * Bootstrap 5.2.0
 * Font-awesome 6.1.1
 * mongoose 5.13.14
+* method-override 3.0.0
