@@ -11,6 +11,20 @@
             <button class="btn btn-major mx-2" type="submit" id="search-button"><i class="fas fa-search"></i></button>
             <a href="/restaurants/new" class="btn btn-major me-2">新增餐廳</a>
           </div>
+          {{!-- dropdown box for sort --}}
+          <div class="dropdown">
+            <button class="btn btn-major dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              變更排序
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/sort/nameAse">依名稱（遞增）</a></li>
+              <li><a class="dropdown-item" href="/sort/nameDesc">依名稱（遞減）</a></li>
+              <li><a class="dropdown-item" href="/sort/category">依類別</a></li>
+              <li><a class="dropdown-item" href="/sort/location">依地區</a></li>
+            </ul>
+          </div>
+
         </div>
       </form>
     </div>

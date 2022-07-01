@@ -23,15 +23,8 @@ router.get('/:_id/edit', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-  const name = req.body.name
-  const nameEn = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const googleMap = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+
+  const { name, nameEn, category, image, location, phone, googleMap, rating, description } = req.body
 
   return Restaurant.create({ name, nameEn, category, image, location, phone, googleMap, rating, description })
     .then(() => res.redirect('/'))
@@ -68,8 +61,7 @@ router.put('/:_id', (req, res) => {
     .catch(error => {
       console.log(error)
       res.render('errorPage', ({ error: error.message }))
-    }
-    )
+    })
 })
 
 router.delete('/:_id', (req, res) => {
