@@ -24,9 +24,8 @@ router.get('/:_id/edit', (req, res) => {
 
 router.post('/new', (req, res) => {
 
-  const { name, nameEn, category, image, location, phone, googleMap, rating, description } = req.body
-
-  return Restaurant.create({ name, nameEn, category, image, location, phone, googleMap, rating, description })
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
@@ -34,25 +33,17 @@ router.post('/new', (req, res) => {
 
 router.put('/:_id', (req, res) => {
   const _id = req.params._id
-  const name = req.body.name
-  const nameEn = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const googleMap = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
 
   return Restaurant.findById(_id)
     .then(restaurant => {
       restaurant.name = name
-      restaurant.name_en = nameEn
+      restaurant.name_en = name_en
       restaurant.category = category
       restaurant.image = image
       restaurant.location = location
       restaurant.phone = phone
-      restaurant.google_map = googleMap
+      restaurant.google_map = google_map
       restaurant.rating = rating
       restaurant.description = description
       return restaurant.save()
