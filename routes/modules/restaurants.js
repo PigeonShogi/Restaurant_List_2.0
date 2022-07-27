@@ -37,15 +37,16 @@ router.put('/:_id', (req, res) => {
 
   return Restaurant.findById(_id)
     .then(restaurant => {
-      restaurant.name = name
-      restaurant.name_en = name_en
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.google_map = google_map
-      restaurant.rating = rating
-      restaurant.description = description
+      // restaurant.name = name
+      // restaurant.name_en = name_en
+      // restaurant.category = category
+      // restaurant.image = image
+      // restaurant.location = location
+      // restaurant.phone = phone
+      // restaurant.google_map = google_map
+      // restaurant.rating = rating
+      // restaurant.description = description
+      restaurant = Object.assign(restaurant, req.body) // 使用 Object.assign，相當於撰寫以上幾行註解的內容。
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${_id}`))
