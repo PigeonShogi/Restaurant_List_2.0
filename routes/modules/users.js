@@ -1,5 +1,9 @@
+const bcrypt = require('bcryptjs')
 const express = require('express')
+const Restaurant = require('../../models/restaurant')
+
 const router = express.Router()
+
 
 router.get('/login', (req, res) => {
   res.render('login')
