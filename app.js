@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 // const Restaurant = require('./models/restaurant')
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('dotenv').config()
 require('./config/mongoose')
 
@@ -21,6 +22,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+usePassport(app)
+
 app.use(routes)
 
 app.listen(port, () => {

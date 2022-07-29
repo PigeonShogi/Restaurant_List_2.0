@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const express = require('express')
+const passport = require('passport')
 const Restaurant = require('../../models/restaurant')
 
 const router = express.Router()
@@ -8,6 +9,17 @@ const router = express.Router()
 router.get('/login', (req, res) => {
   res.render('login')
 })
+
+
+/*
+1. 在 npm 找到 passport 官方文件：https://www.npmjs.com/package/passport
+2. 尋找標題「Authenticate Requests」
+3. 引用範例程式碼，並應需求調整。
+*/
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
 
 router.get('/register', (req, res) => {
   res.render('register')
