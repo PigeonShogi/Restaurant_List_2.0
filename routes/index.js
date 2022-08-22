@@ -1,5 +1,5 @@
 const express = require('express')
-const restaurant = require('../models/restaurant')
+// const restaurant = require('../models/restaurant') 這是不需要的？
 const router = express.Router()
 const home = require('./modules/home')
 const restaurants = require('./modules/restaurants')
@@ -7,15 +7,12 @@ const search = require('./modules/search')
 const sort = require('./modules/sort')
 const users = require('./modules/users')
 
-
-router.use('/', home)
-
-router.use('/restaurants', restaurants)
-
-router.use('/search', search)
-
-router.use('/sort', sort)
+const { authenticator } = require('../middleware/auth')
 
 router.use('/users', users)
+router.use('/restaurants', authenticator, restaurants)
+router.use('/search', authenticator, search)
+router.use('/sort', authenticator, sort)
+router.use('/', authenticator, home)
 
 module.exports = router

@@ -1,5 +1,8 @@
+const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const User = require('../models/user')
+
 
 module.exports = app => {
   /*
@@ -19,16 +22,20 @@ module.exports = app => {
   3. Field 的相關說明見 GitHub 官方文件：https://github.com/jaredhanson/passport-local#parameters
   */
   passport.use(new LocalStrategy(
-    { usernameField: 'email' }, (username, password, done) => {
+    { usernameField: 'email' }, (email, password, done) => {
       User.findOne({ email })
         .then(user => {
           if (!user) {
             return done(null, false, { message: '這個電郵位址尚未註冊' })
           }
-          if (user.password !== password) {
-            return done(null, false, { message: '電郵位址或密碼不正確' })
-          }
-          return done(null, user)
+          return bcrypt.compare(password, user.password)
+            .then(isMatch => {
+              if (!isMatch) {
+                return done(null, false, { message: '電郵位址或密碼不正確' })
+              }
+              consloe.log('輸入密碼與資料庫密碼吻合')
+              return done(null, user)
+            })
         })
         .catch(err => (done(err, false)))
     }))
