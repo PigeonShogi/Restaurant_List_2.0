@@ -2,6 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h1 class="text-center">我的餐廳清單 使用者登入</h1>
+      {{> message}}
       <form action="/users/login" method="post">
         <div class="row mt-1">
           <label for="email">使用者帳號（電子信箱）</label>
@@ -12,8 +13,8 @@
           <input type="password" id="password" placeholder="輸入密碼" required="required">
         </div>
         <div class="d-grid gap-2 mt-3">
-          <button type="submit" class="btn btn-warning" type="button">登入</button>
-          <a href="#" class="btn btn-primary" type="button">使用 Facebook 帳號登入</a>
+          <button type="submit" class="btn btn-warning">登入</button>
+          <a href="#" class="btn btn-primary">使用 Facebook 帳號登入</a>
         </div>
       </form>
       <div class="row mt-3 text-center">

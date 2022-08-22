@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs')
 const passport = require('passport')
-const LocalStrategy = require('passport-local')
+const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
 
@@ -9,7 +9,8 @@ module.exports = app => {
   初始化 Passport 模組
   1. 在 npm 找到 passport 的官方文件  https://www.npmjs.com/package/passport
   2. 搜尋 Middleware
-  3. 可知：app.use(passport.initialize())
+  3. 可知：
+     app.use(passport.initialize())
      app.use(passport.session())
      是必要的編碼。
   */
@@ -33,7 +34,7 @@ module.exports = app => {
               if (!isMatch) {
                 return done(null, false, { message: '電郵位址或密碼不正確' })
               }
-              consloe.log('輸入密碼與資料庫密碼吻合')
+              // console.log('輸入密碼與資料庫密碼吻合')
               return done(null, user)
             })
         })

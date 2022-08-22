@@ -27,6 +27,7 @@ router.get('/logout', (req, res) => {
   3. 引用範例語法，並應需求修改。
   */
   req.logout()
+  req.flash('success_msg', '你已經登出系統')
   res.redirect('/users/login')
 })
 
@@ -37,19 +38,37 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   console.log('註冊資料 === ', name, email, password, confirmPassword)
+  const errors = []
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: '所有欄位都是必填' })
+  }
+  if (password !== confirmPassword) {
+    errors.push({ message: '密碼與確認密碼不一致！' })
+  }
+  if (errors.length) {
+    return res.render('register', {
+      errors,
+      name,
+      email,
+      password,
+      confirmPassword
+    })
+  }
   // 從 User 資料庫中的 email 屬性尋找是否有值與 email 相符的資料
   User.findOne({ email })
     .then(user => {
       if (user) {
-        console.log('User already exists.')
+        errors.push({ message: '您輸入的 Email 已有註冊記錄' })
         return res.render('register', {
+          errors,
           name,
           email,
           password,
           confirmPassword
         })
       }
-      return bcrypt.genSalt() // 加鹽，複雜度 10 時可不填入引數
+      return bcrypt
+        .genSalt(10) // 加鹽，複雜度 10 時可不填入引數
         .then(salt => bcrypt.hash(password, salt))
         /*
         1. 進入說明文件：https://www.npmjs.com/package/bcryptjs#security-considerations
@@ -63,7 +82,7 @@ router.post('/register', (req, res) => {
           email,
           password: hash,
         }))
-        .then(() => res.render('login'))
+        .then(() => res.redirect('/'))
         .catch(err => console.log(err))
     })
 })
