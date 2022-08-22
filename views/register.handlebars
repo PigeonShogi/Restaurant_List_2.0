@@ -6,23 +6,24 @@
       <form action="/users/register" method="post">
         <div class="row mt-1">
           <label for="name">姓名</label>
-          <input type="text" id="name" name="name" placeholder="輸入姓名"  value="{{name}}">
+          <input type="text" id="name" name="name" placeholder="輸入姓名" value="{{name}}">
         </div>
         <div class="row mt-1">
           <label for="email">使用者帳號（電子信箱）</label>
-          <input type="email" id="email" name="email" placeholder="輸入帳號"  value="{{email}}">
+          <input type="email" id="email" name="email" placeholder="輸入帳號" value="{{email}}">
         </div>
         <div class="row mt-1">
           <label for="password">密碼</label>
-          <input type="password" id="password" name="password" placeholder="輸入密碼" 
-            value="{{password}}">
+          <input type="password" id="password" name="password" placeholder="輸入密碼" value="{{password}}">
         </div>
         <div class="row mt-1">
           <label for="confirm-password">確認密碼</label>
-          <input type="password" id="confirm-password" name="confirmPassword" placeholder="再次輸入密碼"  value="{{confirmPassword}}">
+          <input type="password" id="confirm-password" name="confirmPassword" placeholder="再次輸入密碼"
+            value="{{confirmPassword}}">
         </div>
         <div class="d-grid gap-2 mt-3">
           <button type="submit" class="btn btn-warning" type="button">確定註冊</button>
+          <a href="/auth/facebook" class="btn btn-primary">使用 Facebook 登入</a>
         </div>
       </form>
       <div class="row mt-3 text-center">

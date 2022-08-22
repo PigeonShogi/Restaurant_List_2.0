@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../../models/user')
 const passport = require('passport')
 // const Restaurant = require('../../models/restaurant') 不需要？
+const User = require('../../models/user')
 const bcrypt = require('bcryptjs')
 
 router.get('/login', (req, res) => {

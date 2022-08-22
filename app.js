@@ -10,8 +10,12 @@ const usePassport = require('./config/passport')
 require('dotenv').config()
 require('./config/mongoose')
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -19,7 +23,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true })) // true 才是正確，當初為何 false 也能用？
 app.use(methodOverride('_method'))
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'absurdBranch',
   resave: false,
   saveUninitialized: true
 }))
@@ -29,8 +33,8 @@ app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
-  res.locals.success_msg = req.flash('success_msg') 
-  res.locals.warning_msg = req.flash('warning_msg') 
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 

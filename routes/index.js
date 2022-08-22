@@ -6,10 +6,12 @@ const restaurants = require('./modules/restaurants')
 const search = require('./modules/search')
 const sort = require('./modules/sort')
 const users = require('./modules/users')
+const facebookAuth = require('./modules/auth')
 
 const { authenticator } = require('../middleware/auth')
 
 router.use('/users', users)
+router.use('/auth', facebookAuth)
 router.use('/restaurants', authenticator, restaurants)
 router.use('/search', authenticator, search)
 router.use('/sort', authenticator, sort)
