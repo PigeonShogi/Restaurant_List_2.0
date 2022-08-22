@@ -23,7 +23,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true })) // true 才是正確，當初為何 false 也能用？
 app.use(methodOverride('_method'))
 app.use(session({
-  secret: 'absurdBranch',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
